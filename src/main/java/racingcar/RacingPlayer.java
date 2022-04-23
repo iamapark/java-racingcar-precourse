@@ -1,10 +1,14 @@
 package racingcar;
 
+import static camp.nextstep.edu.missionutils.Randoms.pickNumberInRange;
+
 /**
  * @author jinyoung
  * @date 2022/04/23
  */
 public class RacingPlayer {
+
+    private final int MIN_MOVING_FORWARD_NUMBER = 4;
 
     private final String carPlayerName;
 
@@ -18,5 +22,10 @@ public class RacingPlayer {
         }
 
         this.carPlayerName = carPlayerName;
+    }
+
+    public boolean tryMovingForward() {
+        final int randomNumber = pickNumberInRange(0, 9);
+        return randomNumber >= MIN_MOVING_FORWARD_NUMBER;
     }
 }
