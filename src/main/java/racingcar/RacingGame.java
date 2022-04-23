@@ -8,14 +8,13 @@ public class RacingGame {
 
     public void start() {
         final RacingPlayers racingPlayers = getRacingPlayers();
-        System.out.println("numberOfPlayers: " + racingPlayers.numberOfPlayers());
-
-        final RacingMovingNumber racingMovingNumber = getRacingMovingNumber();
+        final RacingMovingRound racingMovingNumber = getRacingMovingNumber();
+        racingPlayers.play(racingMovingNumber);
     }
 
-    private RacingMovingNumber getRacingMovingNumber() {
+    private RacingMovingRound getRacingMovingNumber() {
         System.out.println("시도할 횟수");
-        return RacingMovingNumber.getMovingNumberFromUserConsoleInput();
+        return RacingMovingRound.getRacingMovingRound();
     }
 
     private RacingPlayers getRacingPlayers() {

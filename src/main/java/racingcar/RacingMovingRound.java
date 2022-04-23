@@ -6,11 +6,11 @@ import camp.nextstep.edu.missionutils.Console;
  * @author jinyoung
  * @date 2022/04/23
  */
-public class RacingMovingNumber {
+public class RacingMovingRound {
 
     private final Integer movingNumber;
 
-    public RacingMovingNumber(String movingNumber) {
+    protected RacingMovingRound(String movingNumber) {
         if ("".equals(movingNumber) || movingNumber == null) {
             throw new IllegalArgumentException();
         }
@@ -26,13 +26,17 @@ public class RacingMovingNumber {
         }
     }
 
-    public static RacingMovingNumber getMovingNumberFromUserConsoleInput() {
+    public static RacingMovingRound getRacingMovingRound() {
         final String movingNumber = Console.readLine();
         try {
-            return new RacingMovingNumber(movingNumber);
+            return new RacingMovingRound(movingNumber);
         } catch (IllegalArgumentException iae) {
             System.out.println("[ERROR] " + iae.getMessage());
-            return getMovingNumberFromUserConsoleInput();
+            return getRacingMovingRound();
         }
+    }
+
+    public Integer movingNumber() {
+        return this.movingNumber;
     }
 }

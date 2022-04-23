@@ -15,14 +15,14 @@ public class RacingMovingNumberTest {
 
     @Test @DisplayName("RacingMovingNumber: 입력 받은 숫자 검증: 숫자 0 또는 숫자가 아닌 문자열을 입력하는 경우 적절한 Exception을 발생시키는지 (IllegalArgumentException)")
     void 숫자0_또는_문자열입력하는경우_RacingMovingNumber_test() {
-        assertThrowsExactly(IllegalArgumentException.class, () -> new RacingMovingNumber("0"));
-        assertThrowsExactly(IllegalArgumentException.class, () -> new RacingMovingNumber("a"));
-        assertThrowsExactly(IllegalArgumentException.class, () -> new RacingMovingNumber("@#!@"));
+        assertThrowsExactly(IllegalArgumentException.class, () -> new RacingMovingRound("0"));
+        assertThrowsExactly(IllegalArgumentException.class, () -> new RacingMovingRound("a"));
+        assertThrowsExactly(IllegalArgumentException.class, () -> new RacingMovingRound("@#!@"));
     }
 
     @ParameterizedTest(name = "RacingMovingNumber: 입력 받은 숫자 검증: 빈 값 또는 공백 문자가 입력되는 경우 적절한 Exception을 발생시키는지 (IllegalArgumentException)")
     @NullAndEmptySource
     void 빈값_또는_공백문자_입력하는경우_RacingMovingNumber_test(String nullOrEmptyUserInput) {
-        assertThrowsExactly(IllegalArgumentException.class, () -> new RacingMovingNumber(nullOrEmptyUserInput));
+        assertThrowsExactly(IllegalArgumentException.class, () -> new RacingMovingRound(nullOrEmptyUserInput));
     }
 }

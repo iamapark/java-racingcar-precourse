@@ -32,7 +32,36 @@ public class RacingPlayers {
         }
     }
 
-    public Integer numberOfPlayers() {
+    protected Integer numberOfPlayers() {
         return this.racingPlayers.size();
+    }
+
+    public List<RacingPlayer> getRacingPlayers() {
+        return racingPlayers;
+    }
+
+    public void play(RacingMovingRound racingMovingRound) {
+        System.out.println("실행 결과");
+        for (int round = 0; round < racingMovingRound.movingNumber(); round++) {
+            startRound();
+        }
+        printFinalResult();
+    }
+
+    private void printFinalResult() {
+        final RacingWinners racingWinners = RacingWinners.getRacingWinners(this);
+        final StringBuilder winnerNames = new StringBuilder();
+        for (RacingPlayer winner : racingWinners.getRacingWinners()) {
+            winnerNames.append(winner.getCarPlayerName()).append(",");
+        }
+        System.out.println("최종 우승자: " + winnerNames.deleteCharAt(winnerNames.length() - 1));
+    }
+
+    private void startRound() {
+        for (RacingPlayer racingPlayer : this.racingPlayers) {
+            racingPlayer.tryMovingForward();
+            racingPlayer.printCurrentStatus();
+        }
+        System.out.println();
     }
 }

@@ -4,35 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mockStatic;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
+import util.StandardOutputAssertionTest;
 
 /**
  * @author jinyoung
  * @date 2022/04/23
  */
-public class RacingPlayersErrorTest {
-
-    private PrintStream standardOut;
-    private OutputStream captor;
-
-    @BeforeEach
-    protected final void init() {
-        standardOut = System.out;
-        captor = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(captor));
-    }
-
-    @AfterEach
-    protected final void printOutput() {
-        System.setOut(standardOut);
-    }
+public class RacingPlayersErrorTest extends StandardOutputAssertionTest {
 
     @Test
     @DisplayName("사용자로부터 값을 입력 받아서 레이싱 플레이어를 식별. 잘못된 값을 입력 받는 경우 적절한 에러 문구를 출력하는지 검증")
@@ -44,7 +25,7 @@ public class RacingPlayersErrorTest {
         try (final MockedStatic<Console> mock = mockStatic(Console.class)) {
             mock.when(Console::readLine).thenReturn(expectedReadLine, expectedReadLineValues);
             RacingPlayers.getRacingPlayersFromUserConsoleInput();
-            assertEquals(expectedErrorMessage, this.captor.toString().trim());
+            assertEquals(expectedErrorMessage, output());
         }
     }
 }

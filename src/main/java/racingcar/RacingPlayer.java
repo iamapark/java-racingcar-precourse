@@ -11,6 +11,7 @@ public class RacingPlayer {
     private final int MIN_MOVING_FORWARD_NUMBER = 4;
 
     private final String carPlayerName;
+    private int movingForwardCount;
 
     public RacingPlayer(String carPlayerName) {
         if ("".equals(carPlayerName) || carPlayerName == null) {
@@ -22,10 +23,31 @@ public class RacingPlayer {
         }
 
         this.carPlayerName = carPlayerName;
+        this.movingForwardCount = 0;
     }
 
-    public boolean tryMovingForward() {
+    public void tryMovingForward() {
         final int randomNumber = pickNumberInRange(0, 9);
-        return randomNumber >= MIN_MOVING_FORWARD_NUMBER;
+        final boolean hasMovingForward = randomNumber >= MIN_MOVING_FORWARD_NUMBER;
+        if (hasMovingForward) {
+            this.movingForwardCount += 1;
+        }
+    }
+
+    public String getCarPlayerName() {
+        return carPlayerName;
+    }
+
+    public int getMovingForwardCount() {
+        return movingForwardCount;
+    }
+
+    public void printCurrentStatus() {
+        final StringBuilder movingForwardCountString = new StringBuilder();
+        final int movingForwardCount = getMovingForwardCount();
+        for (int i = 0; i < movingForwardCount; i++) {
+            movingForwardCountString.append("-");
+        }
+        System.out.println(getCarPlayerName() + " : " + movingForwardCountString);
     }
 }
