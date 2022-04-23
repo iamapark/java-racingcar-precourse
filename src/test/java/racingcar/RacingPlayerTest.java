@@ -1,40 +1,38 @@
 package racingcar;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.mockStatic;
 
+import camp.nextstep.edu.missionutils.Randoms;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.mockito.MockedStatic;
 
 /**
  * @author jinyoung
- * @since 2022/04/23
+ * @date 2022/04/23
  */
-class RacingPlayerTest {
+public class RacingPlayerTest {
 
-    @Test @DisplayName("RacingPlayers: 쉼표가 없는 경우 한 명의 플레이어로 인식 하는지")
-    void 쉼표가_없는경우_기능_테스트_RacingPlayers_test() {
-        assertEquals(1, new RacingPlayers("young").numberOfPlayers());
+    private final RacingPlayer mangoPlayer = new RacingPlayer("mango");
+
+    @Test @DisplayName("RacingPlayerMoving: 경주 플레이어가 생성한 랜덥 값이 4 이상인 경우 전진하는지 검증")
+    void 생성한_랜덤값이_4이상인경우_전진하는지_RacingPlayerMoving_test() {
+        assertPlayerTryForwardResult(4, true);
     }
 
-    @Test @DisplayName("RacingPlayers: 쉼표 기준으로 두 명 이상의 플레이어를 인식 하는지")
-    void 쉼표로_플레이어_구분하는_기능_테스트_RacingPlayers_test() {
-        assertEquals(3, new RacingPlayers("pobi,crong,young").numberOfPlayers());
-        assertEquals(2, new RacingPlayers("pobi,crong").numberOfPlayers());
-        assertEquals(4, new RacingPlayers("pobi,crong,makao,obj").numberOfPlayers());
+    @Test @DisplayName("RacingPlayerMoving: 경주 플레이어가 생성한 랜덤 값이 3 이하인 경우 멈추는지 검증")
+    void 생성한_랜덤값이_3이하인경우_멈추는지_RacingPlayerMoving_test() {
+        assertPlayerTryForwardResult(3, false);
+        assertPlayerTryForwardResult(2, false);
+        assertPlayerTryForwardResult(1, false);
     }
 
-    @Test @DisplayName("RacingPlayers: 쉼표 기준으로 구분했을 때 5자를 초과하여 입력한 경우 적절한 Exception을 발생시키는지 (IllegalArgumentException)")
-    void 쉼표_기준을_구분했을때_5자_초과하는경우_RacingPlayers_test() {
-        assertThrowsExactly(IllegalArgumentException.class, () -> new RacingPlayers("pobi,makao1"));
-    }
-
-    @ParameterizedTest(name = "RacingPlayers: 빈 값 또는 공백 문자가 입력되는 경우 적절한 Exception을 발생시키는지 (IllegalArgumentException)")
-    @NullAndEmptySource
-    void 빈값_또는_공백문자_입력하는경우_RacingPlayers_test(String nullOrEmptyUserInput) {
-        assertThrowsExactly(IllegalArgumentException.class, () -> new RacingPlayers(nullOrEmptyUserInput));
+    void assertPlayerTryForwardResult(Integer expectedRandomNumber, boolean expectedPlayerMovingForwardResult) {
+        try (final MockedStatic<Randoms> mock = mockStatic(Randoms.class)) {
+            mock.when(() -> Randoms.pickNumberInRange(anyInt(), anyInt())).thenReturn(expectedRandomNumber);
+            assertEquals(expectedPlayerMovingForwardResult, mangoPlayer.tryMovingForward());
+        }
     }
 }
