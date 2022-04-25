@@ -1,8 +1,14 @@
-package racingcar;
+package racingcar.controller;
+
+import static racingcar.BaseConstants.PRINT_MSG_INPUT_RACING_MOVING_NUMBER;
+import static racingcar.BaseConstants.PRINT_MSG_INPUT_RACING_PLAYERS;
+
+import racingcar.domain.RacingMovingRound;
+import racingcar.domain.RacingPlayers;
 
 /**
  * @author jinyoung
- * @date 2022/04/23
+ * @since 2022/04/23
  */
 public class RacingGame {
 
@@ -13,12 +19,12 @@ public class RacingGame {
     }
 
     private RacingMovingRound getRacingMovingNumber() {
-        System.out.println("시도할 횟수");
+        System.out.println(PRINT_MSG_INPUT_RACING_MOVING_NUMBER);
         return RacingMovingRound.getRacingMovingRound();
     }
 
     private RacingPlayers getRacingPlayers() {
-        System.out.println("경주 할 자동차 이름(이름은 쉼표(,) 기준으로 구분)");
+        System.out.println(PRINT_MSG_INPUT_RACING_PLAYERS);
         return RacingPlayers.getRacingPlayersFromUserConsoleInput();
     }
 }

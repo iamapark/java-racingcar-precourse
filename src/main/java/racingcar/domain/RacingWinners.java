@@ -1,20 +1,24 @@
-package racingcar;
+package racingcar.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author jinyoung
- * @date 2022/04/23
+ * @since 2022/04/23
  */
 public class RacingWinners {
 
     private final List<RacingPlayer> racingWinners;
     private int maxMovingForwardCount;
 
-    public RacingWinners(List<RacingPlayer> racingWinners) {
+    private RacingWinners(List<RacingPlayer> racingWinners) {
         this.racingWinners = racingWinners;
         this.maxMovingForwardCount = 0;
+    }
+
+    public List<RacingPlayer> getRacingWinners() {
+        return racingWinners;
     }
 
     public static RacingWinners getRacingWinners(RacingPlayers racingPlayers) {
@@ -35,9 +39,5 @@ public class RacingWinners {
             this.getRacingWinners().add(racingPlayer);
             this.maxMovingForwardCount = racingPlayer.getMovingForwardCount();
         }
-    }
-
-    public List<RacingPlayer> getRacingWinners() {
-        return racingWinners;
     }
 }

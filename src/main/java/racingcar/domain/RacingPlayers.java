@@ -1,4 +1,9 @@
-package racingcar;
+package racingcar.domain;
+
+import static racingcar.BaseConstants.ERROR_MSG_EMPTY_VALUE;
+import static racingcar.BaseConstants.ERROR_MSG_PREFIX;
+import static racingcar.BaseConstants.PRINT_MSG_FINAL_RESULT_PREFIX;
+import static racingcar.BaseConstants.PRINT_MSG_PLAY_RESULT;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
@@ -6,7 +11,7 @@ import java.util.List;
 
 /**
  * @author jinyoung
- * @date 2022/04/23
+ * @since 2022/04/23
  */
 public class RacingPlayers {
 
@@ -14,7 +19,7 @@ public class RacingPlayers {
 
     protected RacingPlayers(String racingParticipators) {
         if ("".equals(racingParticipators) || racingParticipators == null) {
-            throw new IllegalArgumentException("빈 값은 입력할 수 없습니다.");
+            throw new IllegalArgumentException(ERROR_MSG_EMPTY_VALUE);
         }
         this.racingPlayers = new ArrayList<>();
         for (String carPlayerName : racingParticipators.split(",")) {
@@ -27,13 +32,9 @@ public class RacingPlayers {
         try {
             return new RacingPlayers(racingParticipators);
         } catch (IllegalArgumentException iae) {
-            System.out.println("[ERROR] " + iae.getMessage());
+            System.out.println(ERROR_MSG_PREFIX + iae.getMessage());
             return getRacingPlayersFromUserConsoleInput();
         }
-    }
-
-    protected Integer numberOfPlayers() {
-        return this.racingPlayers.size();
     }
 
     public List<RacingPlayer> getRacingPlayers() {
@@ -41,7 +42,7 @@ public class RacingPlayers {
     }
 
     public void play(RacingMovingRound racingMovingRound) {
-        System.out.println("실행 결과");
+        System.out.println(PRINT_MSG_PLAY_RESULT);
         for (int round = 0; round < racingMovingRound.movingNumber(); round++) {
             startRound();
         }
@@ -54,7 +55,7 @@ public class RacingPlayers {
         for (RacingPlayer winner : racingWinners.getRacingWinners()) {
             winnerNames.append(winner.getCarPlayerName()).append(",");
         }
-        System.out.println("최종 우승자: " + winnerNames.deleteCharAt(winnerNames.length() - 1));
+        System.out.println(PRINT_MSG_FINAL_RESULT_PREFIX + winnerNames.deleteCharAt(winnerNames.length() - 1));
     }
 
     private void startRound() {
