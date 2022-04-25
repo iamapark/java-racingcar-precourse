@@ -14,7 +14,7 @@ public class RacingMovingRound {
 
     private final Integer movingNumber;
 
-     RacingMovingRound(String movingNumber) {
+    RacingMovingRound(String movingNumber) {
         if ("".equals(movingNumber) || movingNumber == null) {
             throw new IllegalArgumentException(ERROR_MSG_EMPTY_VALUE);
         }

@@ -25,14 +25,16 @@ public class RacingPlayerTest {
         racingPlayer = new RacingPlayer("mango");
     }
 
-    @Test @DisplayName("RacingPlayerMoving: 경주 플레이어가 생성한 랜덥 값이 4 이상인 경우 전진하는지 검증")
+    @Test
+    @DisplayName("RacingPlayerMoving: 경주 플레이어가 생성한 랜덥 값이 4 이상인 경우 전진하는지 검증")
     void 생성한_랜덤값이_4이상인경우_전진하는지_RacingPlayerMoving_test() {
         assertPlayerTryForwardResult(MIN_MOVING_FORWARD_NUMBER, 1);
         assertPlayerTryForwardResult(MIN_MOVING_FORWARD_NUMBER + 1, 2);
         assertPlayerTryForwardResult(MAX_RANDOM_NUMBER_RANGE_OF_MOVING_FORWARD, 3);
     }
 
-    @Test @DisplayName("RacingPlayerMoving: 경주 플레이어가 생성한 랜덤 값이 3 이하인 경우 멈추는지 검증")
+    @Test
+    @DisplayName("RacingPlayerMoving: 경주 플레이어가 생성한 랜덤 값이 3 이하인 경우 멈추는지 검증")
     void 생성한_랜덤값이_3이하인경우_멈추는지_RacingPlayerMoving_test() {
         assertPlayerTryForwardResult(MIN_MOVING_FORWARD_NUMBER - 1, 0);
         assertPlayerTryForwardResult(MIN_MOVING_FORWARD_NUMBER + 1, 1);

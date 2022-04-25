@@ -39,7 +39,7 @@ public class RacingPlayer {
 
     public void tryMovingForward() {
         final int randomNumber = pickNumberInRange(
-            MIN_RANDOM_NUMBER_RANGE_OF_MOVING_FORWARD, MAX_RANDOM_NUMBER_RANGE_OF_MOVING_FORWARD
+                MIN_RANDOM_NUMBER_RANGE_OF_MOVING_FORWARD, MAX_RANDOM_NUMBER_RANGE_OF_MOVING_FORWARD
         );
         final boolean hasMovingForward = randomNumber >= MIN_MOVING_FORWARD_NUMBER;
         if (hasMovingForward) {

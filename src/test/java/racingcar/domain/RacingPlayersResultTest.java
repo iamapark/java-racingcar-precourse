@@ -15,7 +15,18 @@ import util.StandardOutputAssertionTest;
  */
 public class RacingPlayersResultTest extends StandardOutputAssertionTest {
 
-    @Test @DisplayName("레이실 실행 결과 출력 테스트")
+    /** example
+      1] 실행 결과
+      2] melon: -
+      3] apple: -
+      4]
+      5] melon: -
+      6] apple: --
+      7]
+      8] 최종 우승자: apple
+      */
+    @Test
+    @DisplayName("레이실 실행 결과 출력 테스트")
     void 레이싱_실행결과_출력_RacingPlayersResult_test() {
         final RacingPlayers racingPlayers = new RacingPlayers("melon,apple");
         final RacingMovingRound racingMovingNumber = new RacingMovingRound("2");
@@ -24,16 +35,6 @@ public class RacingPlayersResultTest extends StandardOutputAssertionTest {
         racingPlayers.play(racingMovingNumber);
         assertThat(output()).contains(PRINT_MSG_PLAY_RESULT, "melon : ", "apple : ", "최종 우승자: ");
 
-        /* example
-          1] 실행 결과
-          2] melon: -
-          3] apple: -
-          4]
-          5] melon: -
-          6] apple: --
-          7]
-          8] 최종 우승자: apple
-          */
         assertEquals(8, Arrays.asList(output().split("\n")).size());
     }
 }
